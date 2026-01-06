@@ -1,179 +1,156 @@
 // app/(tabs)/login.tsx
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
-import Colors from '../../constants/Colors';
+// import "../../global.css"
+import { Pressable, SafeAreaView, Text, View } from 'react-native';
 
 export default function LoginScreen() {
   const handleGoogleLogin = (): void => {
-    console.log('Google Login Pressed!');
-    // TODO: Implement Google OAuth
+    console.log('Google Login Pressed');
+  };
+
+  const handleMicrosoftLogin = (): void => {
+    console.log('Microsoft Login Pressed');
+  };
+
+  const handleAppleLogin = (): void => {
+    console.log('Apple Login Pressed');
+  };
+
+  const handleEmailLogin = (): void => {
+    console.log('Email Login Pressed');
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-background">
       <StatusBar style="dark" />
       
-      <View style={styles.content}>
-        {/* Logo Section */}
-        <View style={styles.logoSection}>
-          <Text style={styles.logo}>Kato</Text>
-          <Text style={styles.tagline}>Your AI Assistant</Text>
-        </View>
-
-        {/* Illustration Placeholder */}
-        <View style={styles.illustrationContainer}>
-          <View style={styles.illustrationCircle}>
-            <Text style={styles.illustrationEmoji}>🤖</Text>
+      <View className="flex-1 px-6 justify-center">
+        {/* Logo Circle */}
+        <View className="items-center mb-8">
+          <View 
+            className="w-20 h-20 bg-primary rounded-full items-center justify-center mb-4"
+            style={{
+              shadowColor: '#007AFF',
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.25,
+              shadowRadius: 12,
+              elevation: 8,
+            }}
+          >
+            <Text className="text-4xl font-bold text-white">K</Text>
           </View>
-        </View>
-
-        {/* Welcome Text */}
-        <View style={styles.welcomeSection}>
-          <Text style={styles.welcomeTitle}>Welcome!</Text>
-          <Text style={styles.welcomeSubtitle}>
-            Sign in to continue with your AI assistant app
+          
+          <Text className="text-2xl font-bold text-text-primary font-inter mb-1">
+            Kato
+          </Text>
+          <Text className="text-sm text-text-secondary font-inter">
+            Your AI Business Assistant
           </Text>
         </View>
 
-        {/* Google Login Button */}
-        <TouchableOpacity 
-          style={styles.googleButton}
-          onPress={handleGoogleLogin}
-          activeOpacity={0.85}
-        >
-          <View style={styles.googleIconContainer}>
-            <Text style={styles.googleIcon}>G</Text>
-          </View>
-          <Text style={styles.googleButtonText}>Continue with Google</Text>
-        </TouchableOpacity>
+        {/* Login Buttons */}
+        <View className="space-y-3">
+          {/* Google Button */}
+          <Pressable
+            onPress={handleGoogleLogin}
+            className="flex-row items-center bg-white rounded-xl px-5 py-4 border border-border-medium active:scale-[0.98]"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.06,
+              shadowRadius: 8,
+              elevation: 3,
+            }}
+          >
+            <View className="w-5 h-5 mr-4">
+              <Text className="text-base">
+                <View className="w-5 h-5 rounded-full bg-[#4285F4] items-center justify-center">
+                  <Text className="text-white text-xs font-bold">G</Text>
+                </View>
+              </Text>
+            </View>
+            <Text className="flex-1 text-center text-base font-semibold text-text-primary font-inter mr-5">
+              Continue with Google
+            </Text>
+          </Pressable>
+
+          {/* Microsoft Button */}
+          <Pressable
+            onPress={handleMicrosoftLogin}
+            className="flex-row items-center bg-white rounded-xl px-5 py-4 border border-border-medium active:scale-[0.98]"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.06,
+              shadowRadius: 8,
+              elevation: 3,
+            }}
+          >
+            <View className="w-5 h-5 mr-4">
+              <View className="flex-row flex-wrap w-5 h-5">
+                <View className="w-2 h-2 bg-[#F25022]" />
+                <View className="w-2 h-2 bg-[#7FBA00]" />
+                <View className="w-2 h-2 bg-[#00A4EF]" />
+                <View className="w-2 h-2 bg-[#FFB900]" />
+              </View>
+            </View>
+            <Text className="flex-1 text-center text-base font-semibold text-text-primary font-inter mr-5">
+              Continue with Microsoft
+            </Text>
+          </Pressable>
+
+          {/* Apple Button */}
+          <Pressable
+            onPress={handleAppleLogin}
+            className="flex-row items-center bg-white rounded-xl px-5 py-4 border border-border-medium active:scale-[0.98]"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.06,
+              shadowRadius: 8,
+              elevation: 3,
+            }}
+          >
+            <View className="w-5 h-5 mr-4">
+              <Text className="text-xl">🍎</Text>
+            </View>
+            <Text className="flex-1 text-center text-base font-semibold text-text-primary font-inter mr-5">
+              Continue with Apple
+            </Text>
+          </Pressable>
+
+          {/* Email Button */}
+          <Pressable
+            onPress={handleEmailLogin}
+            className="flex-row items-center bg-white rounded-xl px-5 py-4 border border-border-medium active:scale-[0.98]"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.06,
+              shadowRadius: 8,
+              elevation: 3,
+            }}
+          >
+            <View className="w-5 h-5 mr-4">
+              <Text className="text-xl">📧</Text>
+            </View>
+            <Text className="flex-1 text-center text-base font-semibold text-text-primary font-inter mr-5">
+              Continue with Email
+            </Text>
+          </Pressable>
+        </View>
 
         {/* Terms Text */}
-        <Text style={styles.termsText}>
-          By continuing, you agree to our{' '}
-          <Text style={styles.termsLink}>Terms of Service</Text>
-          {' '}and{' '}
-          <Text style={styles.termsLink}>Privacy Policy</Text>
-        </Text>
+        <View className="mt-8 px-4">
+          <Text className="text-xs text-text-tertiary text-center font-inter leading-5">
+            By continuing, you agree to Kato's{' '}
+            <Text className="text-primary font-semibold">Terms of Service</Text>
+            {' '}and{' '}
+            <Text className="text-primary font-semibold">Privacy Policy</Text>
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 30,
-    justifyContent: 'space-evenly',
-  },
-  logoSection: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  logo: {
-    fontSize: 36,
-    fontWeight: '700',
-    color: '#2C3E50',
-    letterSpacing: 0.5,
-    marginBottom: 8,
-  },
-  tagline: {
-    fontSize: 16,
-    color: '#7F8C8D',
-    fontWeight: '500',
-  },
-  illustrationContainer: {
-    alignItems: 'center',
-    marginVertical: 40,
-  },
-  illustrationCircle: {
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    backgroundColor: '#E8F4F8',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  illustrationEmoji: {
-    fontSize: 80,
-  },
-  welcomeSection: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  welcomeTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 12,
-  },
-  welcomeSubtitle: {
-    fontSize: 16,
-    color: '#7F8C8D',
-    textAlign: 'center',
-    lineHeight: 24,
-    paddingHorizontal: 20,
-  },
-  googleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    borderRadius: 28,
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-    marginBottom: 20,
-  },
-  googleIconContainer: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: '#4285F4',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  googleIcon: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  googleButtonText: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: '#2C3E50',
-  },
-  termsText: {
-    fontSize: 13,
-    color: '#95A5A6',
-    textAlign: 'center',
-    lineHeight: 20,
-    paddingHorizontal: 30,
-  },
-  termsLink: {
-    color: '#1E88E5',
-    fontWeight: '600',
-  },
-});
