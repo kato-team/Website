@@ -1,25 +1,19 @@
-// tailwind.config.js
-/** @type {import('tailwindcss').Config} */
+const nativewind = require("nativewind/preset")
 module.exports = {
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
   ],
-  presets: [require("nativewind/preset")],
+  presets:["nativewind"],
   theme: {
     extend: {
-      // 🎨 PREMIUM COLOR SYSTEM
       colors: {
-        // Primary Background Colors
         background: {
-          DEFAULT: '#F5F5F7',    // Off-white (main background)
-          secondary: '#FAFAFA',  // Lighter shade
-          tertiary: '#FFFFFF',   // Pure white (for cards)
-          dark: '#E5E5EA',       // Subtle gray
+          DEFAULT: '#F5F5F7',    
+          secondary: '#FAFAFA', 
+          tertiary: '#FFFFFF',  
+          dark: '#E5E5EA',      
         },
-
-        // Glass Morphism (iOS-style blur effect)
-        // Note: Use with opacity utilities in React Native
         glass: {
           light: 'rgba(255, 255, 255, 0.65)',    // Light glass
           medium: 'rgba(255, 255, 255, 0.80)',   // Medium glass
