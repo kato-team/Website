@@ -97,7 +97,7 @@ export default function LoginScreen() {
       // Redirect after 2 seconds
       setTimeout(() => {
         setShowSuccess(false);
-        router.push('/(tabs)');
+        router.push('/complete-profile');
       }, 2000);
     }, 500);
   };
@@ -111,6 +111,7 @@ export default function LoginScreen() {
     console.log('Google Login');
     // TODO: Implement Google OAuth
     showSuccessAlert('Google login will be available soon!');
+    router.push('/complete-profile');
   };
 
   return (
@@ -148,80 +149,99 @@ export default function LoginScreen() {
           
           {/* Logo Section */}
           <View className="items-center mb-8">
-            <View style={styles.logoWrapper}>
-              <LinearGradient
-                colors={['#09a3da', '#285fd8']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={{ width: 96, height: 96, borderRadius: 48 }} 
-                className="items-center justify-center border border-blue-200 border-8"
-              >
-                <Text className="text-5xl font-bold text-white tracking-tighter shadow-sm">K</Text>
-              </LinearGradient>
-            </View>
+            <View className="items-center mb-8">
+            <LinearGradient
+              colors={['#09a3da', '#285fd8']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={{ width: 80, height: 80, borderRadius: 20 }} 
+              className="items-center justify-center"
+            >
+              <Text className="text-4xl font-bold text-white">K</Text>
+            </LinearGradient>
             
-            <Text className="text-[42px] font-bold text-[#1C1C1E] mt-4 tracking-tighter">
+            {/* <Text className="text-base font-semibold text-[#1C1C1E] mt-3">
               Kato
-            </Text>
+            </Text> */}
+          </View>
+            
+            {/* <Text className="text-[42px] font-bold text-[#1C1C1E] mt-4 tracking-tighter">
+              Kato
+            </Text> */}
           </View>
 
           {/* Email Login Form */}
-          <View className="mb-2">
+        <View className="mb-2">
             {/* Email Input */}
-            <View className="mb-2">
-              <Text className="text-sm font-medium text-[#6E6E73] mb-2">Email Address</Text>
-              <View className="bg-white border border-[#E5E5EA] rounded-xl px-2 py-2 shadow-sm">
+            <View className="mb-4">
+              <Text className="text-[12px] font-bold text-[#1C1C1E] mb-1.5">
+                Email Address
+              </Text>
+              <View 
+                style={styles.inputWrapper}
+                className="bg-[#ffffff] rounded-3xl px-3 py-2"
+              >
                 <TextInput
-                  placeholder="your.email@example.com"
-                  placeholderTextColor="#AEAEB2"
+                  placeholder="yasin@gmail.com"
+                  placeholderTextColor="#C7C7CC"
                   value={email}
                   onChangeText={setEmail}
                   keyboardType="email-address"
                   autoCapitalize="none"
-                  className="text-[#1C1C1E] text-base"
+                  className="text-[#1C1C1E] text-[15px] font-bold decoration-none"
                 />
               </View>
             </View>
 
             {/* Password Input */}
-            <View className="mb-2">
-              <Text className="text-sm font-medium text-[#6E6E73] mb-2">Password</Text>
-              <View className="bg-white border border-[#E5E5EA] rounded-xl px-2 py-2 shadow-sm flex-row items-center">
+            <View className="mb-4">
+              <Text className="text-[12px] font-bold text-[#1C1C1E] mb-1.5">
+                Password
+              </Text>
+              <View 
+                style={styles.inputWrapper}
+                className="bg-[#ffffff] rounded-3xl px-3 py-2 flex-row items-center"
+              >
                 <TextInput
-                  placeholder="Enter password"
-                  placeholderTextColor="#AEAEB2"
+                  placeholder="161851"
+                  placeholderTextColor="#C7C7CC"
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry={!showPassword}
-                  className="flex-1 text-[#1C1C1E] text-base"
+                  className="flex-1 text-[#1C1C1E] font-bold text-[15px]"
                 />
                 <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                   <Ionicons 
                     name={showPassword ? 'eye-outline' : 'eye-off-outline'} 
-                    size={22} 
-                    color="#AEAEB2" 
+                    size={20} 
+                    color="#C7C7CC" 
                   />
                 </TouchableOpacity>
               </View>
             </View>
 
             {/* Confirm Password Input */}
-            <View className="mb-2">
-              <Text className="text-sm font-medium text-[#6E6E73] mb-2">Confirm Password</Text>
-              <View className="bg-white border border-[#E5E5EA] rounded-xl px-2 py-2 shadow-sm flex-row items-center">
+            <View className="mb-6">
+              <Text className="text-[12px] font-bold text-[#1C1C1E] mb-1.5">
+                Confirm Password
+              </Text>
+              <View 
+                style={styles.inputWrapper}
+                className="bg-[#ffffff] rounded-3xl px-3 py-2 flex-row items-center"
+              >
                 <TextInput
-                  placeholder="Re-enter password"
-                  placeholderTextColor="#AEAEB2"
+                  placeholder="******"
+                  placeholderTextColor="#C7C7CC"
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   secureTextEntry={!showConfirmPassword}
-                  className="flex-1 text-[#1C1C1E] text-base"
+                  className="flex-1 text-[#1C1C1E] font-bold text-[15px]"
                 />
                 <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
                   <Ionicons 
                     name={showConfirmPassword ? 'eye-outline' : 'eye-off-outline'} 
-                    size={22} 
-                    color="#AEAEB2" 
+                    size={20} 
+                    color="#C7C7CC" 
                   />
                 </TouchableOpacity>
               </View>
@@ -234,6 +254,7 @@ export default function LoginScreen() {
               variant="primary"
             />
           </View>
+
 
           {/* Divider */}
           <View className="flex-row items-center mb-2">
@@ -305,5 +326,41 @@ const styles = StyleSheet.create({
     }),
     borderRadius: 48, 
     backgroundColor: 'white',
+  },
+   inputWrapper: {
+    borderWidth: 0,
+    borderColor: '#E5E5EA',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  
+  inputWrapperActive: {
+    borderColor: '#09a3da',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#09a3da',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.15,
+        shadowRadius: 12,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  
+  iconGradient: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
   },
 });
