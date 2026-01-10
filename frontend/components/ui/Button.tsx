@@ -1,3 +1,4 @@
+//Button.tsx
 import React from 'react';
 import { Pressable, Text, View, StyleSheet, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -6,31 +7,29 @@ interface ButtonProps {
   title: string;
   onPress: () => void;
   icon?: React.ReactNode;
-  variant?: 'primary' | 'glass'; // Diffrent places ke liye options
+  variant?: 'primary' | 'glass';
 }
 
 export default function Button({ title, onPress, icon, variant = 'primary' }: ButtonProps) {
-  // Image se liya gaya Deep Blue Gradient
   const primaryGradient: [string, string] = ['#09a3da', '#285fd8'];
-  const glassGradient: [string, string] = ['#FFFFFF', '#ffffff'];
   
   return (
-    <View style={styles.shadowWrapper} className="w-full mb-4">
-
-
-
+    <View className="w-full mb-4">
       <Pressable
         onPress={onPress}
         style={({ pressed }) => [
-          { transform: [{ scale: pressed ? 0.97 : 1 }], opacity: pressed ? 0.9 : 1 }
+          { transform: [{ scale: pressed ? 0.95 : 1 }] }
         ]}
       >
         <LinearGradient
-          colors={variant === 'primary' ? primaryGradient : ['rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.4)']}
+          colors={variant === 'primary' ? primaryGradient : ['#FFFFFF', '#FFFFFF']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={styles.gradientBg}
-          className="flex-row items-center px-6 py-4 border border-white/20"
+          style={[
+            styles.button,
+            variant === 'glass' && styles.glassButton
+          ]}
+          className="flex-row items-center justify-center px-6 py-4"
         >
           {icon && (
             <View className="mr-3">
@@ -39,7 +38,7 @@ export default function Button({ title, onPress, icon, variant = 'primary' }: Bu
           )}
           
           <Text 
-            className={`flex-1 text-center text-[17px] font-bold tracking-tight ${
+            className={`text-center text-[17px] font-bold ${
               variant === 'primary' ? 'text-white' : 'text-[#1C1C1E]'
             }`}
           >
@@ -52,13 +51,17 @@ export default function Button({ title, onPress, icon, variant = 'primary' }: Bu
 }
 
 const styles = StyleSheet.create({
-  shadowWrapper: {
+  button: {
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // AlertModal jaisi exact shadow - deep aur smooth
     ...Platform.select({
       ios: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.08,
-        shadowRadius: 10,
+        shadowOpacity: 0.15,
+        shadowRadius: 8,
       },
       android: {
         elevation: 4,
@@ -66,15 +69,18 @@ const styles = StyleSheet.create({
     }),
   },
 
-  gradientBg: {
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+  glassButton: {
+    // White button ke liye halki shadow
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 6,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
   },
-  pressable: {
-    width: '100%',
-    borderRadius: 10,
-    overflow: 'hidden',
-    zIndex: 1, // Button ko shadow ke upar lane ke liye
-  }
 });

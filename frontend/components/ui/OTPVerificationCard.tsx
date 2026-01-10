@@ -122,10 +122,10 @@ export default function OTPVerificationCard({
               {/* Close Button */}
               <TouchableOpacity
                 onPress={onClose}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center active:scale-90"
+                className="absolute top-4 right-4 w-10 h-10 bg-white/20 rounded-full flex items-center justify-center active:scale-90"
                 style={styles.closeButton}
               >
-                <Ionicons name="close" size={24} color="#fff" />
+                <Ionicons name="close" size={30} color="#fff" />
               </TouchableOpacity>
 
               {/* Success Icon */}
@@ -155,7 +155,7 @@ export default function OTPVerificationCard({
                 {otp.map((digit, index) => (
                   <View
                     key={index}
-                    className="w-12 h-14 bg-white/95 rounded-xl items-center justify-center"
+                    className="w-12 h-14 bg-white/95 rounded-xl text-center flex items-center justify-center"
                     style={[
                       styles.otpBox,
                       digit !== '' && styles.otpBoxFilled
@@ -169,7 +169,7 @@ export default function OTPVerificationCard({
                       keyboardType="number-pad"
                       maxLength={1}
                       selectTextOnFocus
-                      className="text-2xl font-bold text-center w-full h-full"
+                      className="text-2xl font-bold mt-3"
                       style={[
                         styles.otpInput,
                         { color: '#285fd8' }
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
       },
       android: {
-        elevation: 4,
+        elevation: 100
       },
     }),
   },

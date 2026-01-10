@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "Kato",
-    "slug": "demoApp",
+    "slug": "Kato",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "demoapp",
+    "scheme": "kato",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -24,9 +24,9 @@
         "expo-splash-screen",
         {
           "image": "",
-          "backgroundColor": "#F5F5F7",
+          "backgroundColor": "#000",
           "dark": {
-            "backgroundColor": "#F5F5F7"
+            "backgroundColor": "#000"
           }
         }
       ],
