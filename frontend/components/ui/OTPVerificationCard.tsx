@@ -1,4 +1,4 @@
-
+//components\ui\OTPVerificationCard.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, Modal, TouchableOpacity, Animated, Platform, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -7,7 +7,8 @@ import Button from './Button';
 
 interface OTPVerificationCardProps {
   visible: boolean;
-  email: string;
+  target:string;
+  type: 'email'|'phone';
   onVerify: (otp: string) => void;
   onClose: () => void;
   onResend: () => void;
@@ -15,7 +16,8 @@ interface OTPVerificationCardProps {
 
 export default function OTPVerificationCard({
   visible,
-  email,
+  target,
+  type,
   onVerify,
   onClose,
   onResend,
@@ -28,6 +30,15 @@ export default function OTPVerificationCard({
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const shakeAnim = useRef(new Animated.Value(0)).current;
 
+  const isEmail = type === 'email';
+  const config = {
+    icon: isEmail ? 'mail-outline' : 'chatbubble-ellipses-outline',
+    title: isEmail ? 'Verify Your Email' : 'Verify Your Phone',
+    messagePrefix: isEmail ? 'We have sent a 4-digit code to' : 'We have sent an OTP on',
+    formattedTarget: isEmail ? target : `+91 ${target}`,
+    keybordType: isEmail ? 'email-address' : 'phone-pad',
+  }
+
   useEffect(() => {
     if (visible) {
       Animated.spring(scaleAnim, {
@@ -38,6 +49,7 @@ export default function OTPVerificationCard({
       }).start();
     } else {
       scaleAnim.setValue(0);
+      setOtp(['', '', '', '']);
     }
   }, [visible]);
 
@@ -49,7 +61,7 @@ export default function OTPVerificationCard({
     setOtp(newOtp);
 
     // Auto-focus next input
-    if (value && index < 5) {
+    if (value && index < 3) {
       inputRefs.current[index + 1]?.focus();
     }
 
@@ -72,8 +84,7 @@ export default function OTPVerificationCard({
     setTimeout(() => {
       setIsVerifying(false);
       onVerify(otpCode);
-      setOtp(['', '', '', '']); // Reset
-    }, 1500);
+    }, 1000);
   };
 
   const handleResend = () => {
@@ -141,13 +152,13 @@ export default function OTPVerificationCard({
 
               {/* Title */}
               <Text className="text-white text-2xl font-bold text-center mb-2">
-                Verify Your Email
+                {config.title}
               </Text>
 
-              {/* Subtitle */}
+              {/* Dynamic Message */}
               <Text className="text-white/90 text-sm text-center mb-6 leading-5">
-                We've sent a 4-digit code to{'\n'}
-                <Text className="font-bold">{email}</Text>
+                {config.messagePrefix}{'\n'}
+                <Text className="font-bold">{config.formattedTarget}</Text>
               </Text>
 
               {/* OTP Input Boxes */}
@@ -166,14 +177,10 @@ export default function OTPVerificationCard({
                       value={digit}
                       onChangeText={(value) => handleOTPChange(value, index)}
                       onKeyPress={(e) => handleKeyPress(e, index)}
-                      keyboardType="number-pad"
+                      keyboardType={config.keybordType}
                       maxLength={1}
                       selectTextOnFocus
-                      className="text-2xl font-bold mt-3"
-                      style={[
-                        styles.otpInput,
-                        { color: '#285fd8' }
-                      ]}
+                      className="text-2xl font-bold text-[#285fd8] text-center w-full h-full"
                     />
                   </View>
                 ))}
@@ -182,7 +189,7 @@ export default function OTPVerificationCard({
               {/* Verify Button (Using your Button component) */}
               <View className="mb-4">
                 <Button
-                  title={isVerifying ? 'Verifying...' : 'Confirm OTP'}
+                  title={isVerifying ? 'Verifying...' : 'Verify & Proceed'}
                   onPress={() => handleVerify(otp.join(''))}
                   variant="primary"
                 />
@@ -194,7 +201,7 @@ export default function OTPVerificationCard({
                 className="py-2 active:opacity-70"
               >
                 <Text className="text-white/90 text-sm text-center">
-                  Didn't receive code?{' '}
+                  Didn't receive code?
                   <Text className="font-bold underline">Resend</Text>
                 </Text>
               </TouchableOpacity>

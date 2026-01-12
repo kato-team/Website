@@ -16,6 +16,8 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons'; // Camera aur Icons ke liye
 import InputField from '../components/ui/InputField';
 import Button from '../components/ui/Button'; // Aapka existing button
+import PhoneVerificationSection  from '../components/auth/PhoneVerificationSection'
+
 
 export default function CompleteProfile() {
   const router = useRouter();
@@ -54,7 +56,7 @@ const [showModal, setShowModal] = useState(false);
           contentContainerStyle={{ paddingBottom: 40 }}
         >
 
-          <View className="px-6 mt-10">
+          <View className="px-6 mt-20">
             {/* Header */}
             <Text className="text-2xl font-bold text-[#1C1C1E] mb-2">
               Complete Your Profile
@@ -64,10 +66,18 @@ const [showModal, setShowModal] = useState(false);
             </Text>
 
             {/* Top Progress Bars */}
-          <View className="flex-row px-6 mt-2 gap-2">
+          <View className="flex-row my-4 gap-2">
             <View className="flex-1 h-1 bg-[#09a3da] rounded-full" />
-            <View className="flex-1 h-1 bg-gray-300 rounded-full" />
+            <View className="flex-1 h-1 bg-[#09a3da] rounded-full" />
           </View>
+
+
+          {/* Info Box */}
+            <View className="bg-white p-4 rounded-3xl mb-8 border border-gray-100" style={styles.shadow}>
+               <Text className="text-gray-500 text-[13px] leading-5">
+                 We'll use your phone number to send important notifications and verify your identity.
+               </Text>
+            </View>
 
             {/* Profile Image Section */}
             <View className="items-center mb-8">
@@ -81,6 +91,8 @@ const [showModal, setShowModal] = useState(false);
                 </View>
               </TouchableOpacity>
             </View>
+
+            <PhoneVerificationSection/>
 
             {/* Form Fields */}
             <InputField 
