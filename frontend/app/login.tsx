@@ -284,7 +284,8 @@ export default function LoginScreen() {
       {/* OTP Verification Modal */}
       <OTPVerificationCard
         visible={showOTPModal}
-        email={email}
+        type="email"          // <--- Bataya ki Email verify karna hai
+        target={email}        // <--- Email pass kiya
         onVerify={handleVerifyOTP}
         onClose={() => setShowOTPModal(false)}
         onResend={handleResendOTP}
